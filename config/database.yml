@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  username: <%= ENV['THE_DYRT_DB_USERNAME'] %>
+  host: <%= ENV['THE_DYRT_DB_HOSTNAME'] %>
+  port: 5432
+development:
+  <<: *default
+  database: <%= ENV['THE_DYRT_DB_NAME'] %>
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run
+# "rake". Do not set this db to the same as development or
+# production.
+test:
+  <<: *default
+  database: the_dyrt_app_test
