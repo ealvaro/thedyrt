@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CampsitesController < ApplicationController
-  before_action :set_campsite, only: %i[ show update destroy ]
+  before_action :set_campsite, only: %i[show update destroy]
 
   # GET /campsites
   # GET /campsites.json
@@ -9,8 +11,7 @@ class CampsitesController < ApplicationController
 
   # GET /campsites/1
   # GET /campsites/1.json
-  def show
-  end
+  def show; end
 
   # POST /campsites
   # POST /campsites.json
@@ -41,13 +42,14 @@ class CampsitesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_campsite
-      @campsite = Campsite.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def campsite_params
-      params.require(:campsite).permit(:name, :price, :campground_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_campsite
+    @campsite = Campsite.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def campsite_params
+    params.require(:campsite).permit(:name, :price, :campground_id)
+  end
 end

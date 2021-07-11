@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class BookedDatesController < ApplicationController
-  before_action :set_booked_date, only: %i[ show update destroy ]
+  before_action :set_booked_date, only: %i[show update destroy]
 
   # GET /booked_dates
   # GET /booked_dates.json
@@ -9,8 +11,7 @@ class BookedDatesController < ApplicationController
 
   # GET /booked_dates/1
   # GET /booked_dates/1.json
-  def show
-  end
+  def show; end
 
   # POST /booked_dates
   # POST /booked_dates.json
@@ -41,13 +42,14 @@ class BookedDatesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_booked_date
-      @booked_date = BookedDate.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def booked_date_params
-      params.require(:booked_date).permit(:check_in_date, :check_out_date, :campsite_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_booked_date
+    @booked_date = BookedDate.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def booked_date_params
+    params.require(:booked_date).permit(:check_in_date, :check_out_date, :campsite_id)
+  end
 end

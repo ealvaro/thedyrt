@@ -7,7 +7,7 @@ RSpec.describe 'UsersController', type: :request do
   let!(:t_exam) { Exam.create(title: 'Test Exam', college: t_college) }
   let!(:t_exam_window) { ExamWindow.create(start_time: Time.now, end_time: Time.now + 1.hour, exam: t_exam) }
   let!(:t_user) { User.create(first_name: 'John', last_name: 'Doe', phone_number: '954-555-1212', college: t_college) }
-  let(:valid_input) {
+  let(:valid_input) do
     {
       "first_name": t_user.first_name,
       "last_name": t_user.last_name,
@@ -16,7 +16,7 @@ RSpec.describe 'UsersController', type: :request do
       "exam_id": t_exam.id,
       "start_time": t_exam_window.start_time + (1 * 60)
     }
-  }
+  end
   let(:invalid_input) { valid_input.except!(:last_name) }
   let(:invalid_input2) { invalid_input.except!(:college_id) }
 

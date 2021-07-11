@@ -32,4 +32,3 @@ end
     check_out_date: rnd_date + rand(1..14).days
   )
 end
-
