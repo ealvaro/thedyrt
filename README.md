@@ -66,13 +66,13 @@ sudo docker-compose run app rake db:create db:migrate db:seed
 ```
 or if you want to load a csv file then run the following and make sure you put the file in the /loads folder.
 ```shell
-rake db:load
+sudo docker-compose run app rake db:load
 ```
 
 * How to run the test suite
 
 ```shell
-sudo docker-compose run app rspec spec/requests/validate_user.rb
+sudo docker-compose run app rspec spec/requests/
 ```
 
 * How to test it from a web browser
@@ -127,6 +127,14 @@ curl -i -X POST -H "Content-Type: application/json" -H "Accept: application/json
   "check_out_date": "2021-07-18",
   "campsite_id": 11
 }' http://localhost:3000/booked_dates/
+```
+
+* When an invalid endpoint is invoked
+
+```
+{
+"routing_error": "/campground"
+}
 ```
 
 * Testing using POSTMAN
