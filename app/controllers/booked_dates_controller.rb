@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for the Booked Dates of a Campsite
 class BookedDatesController < ApplicationController
   before_action :set_booked_date, only: %i[show update destroy]
 

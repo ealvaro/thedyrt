@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for the Campgrounds
 class CampgroundsController < ApplicationController
   before_action :set_campground, only: %i[show update destroy]
 

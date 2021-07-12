@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for the Campsites
 class CampsitesController < ApplicationController
   before_action :set_campsite, only: %i[show update destroy]
 
@@ -16,7 +17,6 @@ class CampsitesController < ApplicationController
   # POST /campsites
   # POST /campsites.json
   def create
-    byebug
     @campsite = Campsite.new(campsite_params)
 
     if @campsite.save

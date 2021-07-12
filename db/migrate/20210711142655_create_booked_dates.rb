@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Migration that creates Booked Dates for Campsites
 class CreateBookedDates < ActiveRecord::Migration[5.0]
   def change
     create_table :booked_dates do |t|
