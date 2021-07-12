@@ -6,8 +6,7 @@
 2. The models must contain the following:
 - a. Campground
 -     i. name: every Campground has a name
--     ii. campsites: each Campground requires a minimum of one associated
-campsite
+-     ii. campsites: each Campground requires a minimum of one associated campsite
 -     iii. booked_dates: Campgrounds can derive a list of booked dates from their associated Campsites
 -     iv. price_range: Campground derive a price range from their associated
 Campsite
@@ -64,6 +63,10 @@ sudo docker-compose up
 * Database initialization (run from a different console)
 ```shell
 sudo docker-compose run app rake db:create db:migrate db:seed
+```
+or if you want to load a csv file then run the following and make sure you put the file in the /loads folder.
+```shell
+rake db:load
 ```
 
 * How to run the test suite
