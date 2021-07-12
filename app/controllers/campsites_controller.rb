@@ -16,6 +16,7 @@ class CampsitesController < ApplicationController
   # POST /campsites
   # POST /campsites.json
   def create
+    byebug
     @campsite = Campsite.new(campsite_params)
 
     if @campsite.save
