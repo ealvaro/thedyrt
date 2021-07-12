@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :campsites
   resources :campgrounds
 
-  get '*path', to: 'errors#error_404', via: :all
+  get '*path', to: 'errors#error404', via: :all
 end
