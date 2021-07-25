@@ -27,5 +27,9 @@ RSpec.describe CampgroundsController, type: :routing do
     it 'routes to #destroy' do
       expect(delete: '/campgrounds/1').to route_to('campgrounds#destroy', id: '1')
     end
+
+    it 'routes to #available' do
+      expect(get: '/campgrounds/available').to route_to('campgrounds#available')
+    end
   end
 end

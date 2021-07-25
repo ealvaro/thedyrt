@@ -4,6 +4,32 @@
 class CampgroundsController < ApplicationController
   before_action :set_campground, only: %i[show update destroy]
 
+  # GET /campgrounds/available
+  # GET /campgrounds/available.json
+  def available
+    campgrounds_available_params
+    start_date = params['start_date'].to_date
+    end_date = params['end_date'].to_date
+    @campgrounds = []
+
+    if valid_checkin_dates(start_date, end_date)
+      Campground.all.each do |cg|
+        @campgrounds << cg if cg.available(start_date, end_date)
+      end
+    else
+      raise ArgumentError, 'Start Date must be less then End Date and in the future'
+    end
+  end
+
+  # GET /campgrounds/future_booked_dates
+  # GET /campgrounds/future_booked_dates.json
+  def future_booked_dates
+    @campgrounds = []
+    Campground.all.each do |cg|
+      @campgrounds << { campground: cg.name, campsites: cg.future_booked_dates }
+    end
+  end
+
   # GET /campgrounds
   # GET /campgrounds.json
   def index
@@ -52,5 +78,15 @@ class CampgroundsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def campground_params
     params.require(:campground).permit(:name)
+  end
+
+  def campgrounds_available_params
+    params.require(:start_date)
+    params.require(:end_date)
+  end
+
+  # Valid date range and in the future
+  def valid_checkin_dates(start_date, end_date)
+    return true if start_date < end_date && start_date >= Date.today
   end
 end
