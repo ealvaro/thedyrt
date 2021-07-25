@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Model for the Campsite's Booked Dates
 class BookedDate < ApplicationRecord
   belongs_to :campsite
 

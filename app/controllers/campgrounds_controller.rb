@@ -12,12 +12,12 @@ class CampgroundsController < ApplicationController
     end_date = params['end_date'].to_date
     @campgrounds = []
 
-    if valid_checkin_dates(start_date, end_date)
-      Campground.all.each do |cg|
-        @campgrounds << cg if cg.available(start_date, end_date)
-      end
-    else
+    unless valid_checkin_dates(start_date, end_date)
       raise ArgumentError, 'Start Date must be less then End Date and in the future'
+    end
+
+    Campground.all.each do |cg|
+      @campgrounds << cg if cg.available(start_date, end_date)
     end
   end
 
