@@ -55,7 +55,7 @@ class CampgroundsController < ApplicationController
   # PATCH/PUT /campgrounds/1
   # PATCH/PUT /campgrounds/1.json
   def update
-    if @campground.update(campground_params)
+    if !campground_params['name'].nil? && @campground.update(campground_params)
       render :show, status: :ok, location: @campground
     else
       render json: @campground.errors, status: :unprocessable_entity

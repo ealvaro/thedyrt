@@ -13,7 +13,7 @@ require 'rails_helper'
 # It only uses APIs available in rails and/or rspec-rails. There are a number
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
-
+# rubocop:disable Metrics/BlockLength
 RSpec.describe '/booked_dates', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # BookedDate. As you add validations to BookedDate, be sure to
@@ -127,3 +127,4 @@ RSpec.describe '/booked_dates', type: :request do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

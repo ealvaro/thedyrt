@@ -18,12 +18,13 @@ RSpec.describe '/campsites', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Campsite. As you add validations to Campsite, be sure to
   # adjust the attributes here as well.
+  let(:campground) { Campground.create!(name: 'Valid Campground') }
   let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
+    { name: 'The Best Campsite', price: '39.99', campground_id: campground.id }
   end
 
   let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
+    { first_name: 'The Best Campsite', price: 'xxxxx', campground_id: 9999 }
   end
 
   # This should return the minimal set of values that should be in the headers
@@ -87,7 +88,7 @@ RSpec.describe '/campsites', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
+        { name: 'The Updated Campsite', price: '59', campground_id: campground.id }
       end
 
       it 'updates the requested campsite' do
@@ -95,7 +96,8 @@ RSpec.describe '/campsites', type: :request do
         patch campsite_url(campsite),
               params: { campsite: new_attributes }, headers: valid_headers, as: :json
         campsite.reload
-        skip('Add assertions for updated state')
+        expect(campsite.name).to eq(new_attributes[:name])
+        expect(campsite.price).to eq(new_attributes[:price].to_f)
       end
 
       it 'renders a JSON response with the campsite' do

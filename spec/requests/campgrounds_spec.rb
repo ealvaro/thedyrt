@@ -19,11 +19,11 @@ RSpec.describe '/campgrounds', type: :request do
   # Campground. As you add validations to Campground, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
+    { name: 'Test Campground' }
   end
 
   let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
+    { first_name: 'Invalid Campground', invalid_input: 2_345_356 }
   end
 
   # This should return the minimal set of values that should be in the headers
@@ -87,7 +87,7 @@ RSpec.describe '/campgrounds', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
+        { name: 'Updated Test Campground' }
       end
 
       it 'updates the requested campground' do
@@ -95,7 +95,7 @@ RSpec.describe '/campgrounds', type: :request do
         patch campground_url(campground),
               params: { campground: new_attributes }, headers: valid_headers, as: :json
         campground.reload
-        skip('Add assertions for updated state')
+        expect(campground.name).to eq(new_attributes[:name])
       end
 
       it 'renders a JSON response with the campground' do
