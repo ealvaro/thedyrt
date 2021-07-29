@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get 'campgrounds/future_booked_dates', to: 'campgrounds#future_booked_dates'
   get 'campgrounds/available', to: 'campgrounds#available'
+  get 'campgrounds/price_range', to: 'campgrounds#price_range'
   resources :campgrounds
 
   get '*path', to: 'errors#error404', via: :all

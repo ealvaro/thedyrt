@@ -30,6 +30,15 @@ class CampgroundsController < ApplicationController
     end
   end
 
+  # GET /campgrounds/price_range
+  # GET /campgrounds/price_range.json
+  def price_range
+    @campgrounds = []
+    Campground.all.each do |cg|
+      @campgrounds << { campground: cg.name, price_range: cg.price_range }
+    end
+  end
+
   # GET /campgrounds
   # GET /campgrounds.json
   def index
