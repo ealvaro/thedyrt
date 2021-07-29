@@ -2,7 +2,7 @@
 
 # Model for the Campgrounds
 class Campground < ApplicationRecord
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   has_many :campsites
 
   def available(start_date, end_date)

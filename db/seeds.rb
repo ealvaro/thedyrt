@@ -10,25 +10,29 @@
 
 # Time slots during the next 14 days
 
-10.times do
+1000.times do
+  # Campground name must be unique so we add a random Roman numeral to the name
+  name = Faker::Mountain.name
   Campground.create!(
-    name: Faker::Mountain.name
+    name: "#{name} #{rand(1..1000).roman}"
   )
+rescue ActiveRecord::RecordInvalid
+  next
 end
 
-40.times do |index|
+(Campground.all.count * 4).times do |index|
   Campsite.create!(
     name: Faker::Alphanumeric.alphanumeric(number: 10),
-    price: Faker::Number.between(from: 35, to: 100),
+    price: Faker::Number.between(from: 35, to: 199),
     campground: Campground.find(index / 4 + 1)
   )
 end
 
-40.times do |index|
-  rnd_date = Faker::Date.forward(days: 60)
+(Campground.all.count * 4).times do |index|
+  rnd_date = Faker::Date.forward(days: 90)
   BookedDate.create!(
     campsite: Campsite.find(index + 1),
     check_in_date: rnd_date,
-    check_out_date: rnd_date + rand(1..14).days
+    check_out_date: rnd_date + rand(1..21).days
   )
 end

@@ -3,5 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe Campground, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:valid_campground) do
+    { name: 'Test Campground' }
+  end
+  let(:invalid_campground) do
+    { invalid_name: 'Invalid Campground' }
+  end
 end

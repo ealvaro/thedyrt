@@ -27,8 +27,8 @@ RSpec.describe BookedDate, type: :model do
 
   describe 'Create valid Booked Date' do
     it 'saves it in the database' do
-      campsite = BookedDate.create! valid_booked_dates
-      expect(campsite).to be_valid
+      booked_date = BookedDate.create! valid_booked_dates
+      expect(booked_date).to be_valid
       expect(BookedDate.count).to eq(1)
     end
   end
@@ -44,9 +44,9 @@ RSpec.describe BookedDate, type: :model do
 
   describe 'Booked Date not in the future' do
     it 'return false' do
-      campsite = BookedDate.create! past_booked_dates
-      expect(campsite).to be_valid
-      expect(campsite.in_the_future).to be(false)
+      booked_date = BookedDate.create! past_booked_dates
+      expect(booked_date).to be_valid
+      expect(booked_date.in_the_future).to be(false)
     end
   end
 end
