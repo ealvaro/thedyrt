@@ -18,12 +18,14 @@ RSpec.describe '/booked_dates', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # BookedDate. As you add validations to BookedDate, be sure to
   # adjust the attributes here as well.
+  let(:campground) { Campground.create!(name: 'Valid Campground') }
+  let(:campsite) { Campsite.create!(name: 'The Best Campsite', price: '39.99', campground_id: campground.id) }
   let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
+    { check_in_date: Date.today, check_out_date: Date.today + 2.days, campsite_id: campsite.id }
   end
 
   let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
+    { check_in_date: Date.today, check_out_date: Date.today - 2.days, campsite_id: campsite.id }
   end
 
   # This should return the minimal set of values that should be in the headers
@@ -87,7 +89,7 @@ RSpec.describe '/booked_dates', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
+        { campsite: campsite, check_in_date: Date.today - 5.days, check_out_date: Date.today - 2.days }
       end
 
       it 'updates the requested booked_date' do
@@ -95,7 +97,8 @@ RSpec.describe '/booked_dates', type: :request do
         patch booked_date_url(booked_date),
               params: { booked_date: new_attributes }, headers: valid_headers, as: :json
         booked_date.reload
-        skip('Add assertions for updated state')
+        expect(booked_date.check_in_date).to eq(new_attributes[:check_in_date].to_date)
+        expect(booked_date.check_out_date).to eq(new_attributes[:check_out_date].to_date)
       end
 
       it 'renders a JSON response with the booked_date' do
