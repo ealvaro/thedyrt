@@ -5,11 +5,21 @@ class Campground < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   has_many :campsites
 
+  HIGHEST_PRICE = 10_000
   def available(start_date, end_date)
-    # byebug
     booked_camps = future_booked_dates
 
-    no_conflicts(start_date, end_date, booked_camps)
+    no_conflicts(start_date, end_date, booked_camps) ||
+      campsites_not_booked?
+  end
+
+  # Any Campsite not booked at all or in the future?
+  def campsites_not_booked?
+    booked = true
+    campsites.each do |campsite|
+      booked &&= campsite.booked?
+    end
+    !booked
   end
 
   def booked_dates
@@ -39,7 +49,7 @@ class Campground < ApplicationRecord
   end
 
   def price_range
-    lowest = 1000
+    lowest = HIGHEST_PRICE
     highest = 0
     campsites.each do |camp|
       lowest = camp.price if camp.price < lowest

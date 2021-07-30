@@ -8,7 +8,8 @@ class BookedDate < ApplicationRecord
 
   def in_the_future
     # Only interested in future booked dates from today
-    return true if check_out_date >= Date.today
+    # check_in_date is the first night and check_out_date is not allowed to stay that night.
+    return true if check_out_date > Date.today
 
     false
   end
