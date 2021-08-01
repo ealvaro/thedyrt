@@ -19,6 +19,6 @@ class BookedDate < ApplicationRecord
   def check_out_after_check_in
     return if check_out_date.blank? || check_in_date.blank?
 
-    errors.add(:check_out_date, 'must be after the check_in date') if check_out_date < check_in_date
+    errors.add(:check_out_date, "must be after the check_in date") if check_out_date <= check_in_date
   end
 end

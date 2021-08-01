@@ -16,7 +16,7 @@ class Campground < ApplicationRecord
   # Any Campsite not booked at all or in the future?
   def campsites_not_booked?
     booked = true
-    campsites.each do |campsite|
+    campsites.includes(:booked_dates).each do |campsite|
       booked &&= campsite.booked?
     end
     !booked
@@ -24,11 +24,11 @@ class Campground < ApplicationRecord
 
   def booked_dates
     booked = []
-    campsites.each do |camp|
+    campsites.includes(:booked_dates).each do |camp|
       camp.booked_dates.each do |date|
-        booked << { camp: camp.name,
-                    check_in: date.check_in_date,
-                    check_out: date.check_out_date }
+        booked << {camp: camp.name,
+                   check_in: date.check_in_date,
+                   check_out: date.check_out_date}
       end
     end
     booked
@@ -36,13 +36,13 @@ class Campground < ApplicationRecord
 
   def future_booked_dates
     booked = []
-    campsites.each do |campsite|
+    campsites.includes(:booked_dates).each do |campsite|
       campsite.booked_dates.each do |date|
         next unless date.in_the_future
 
-        booked << { campsite: campsite.name,
-                    check_in: date.check_in_date,
-                    check_out: date.check_out_date }
+        booked << {campsite: campsite.name,
+                   check_in: date.check_in_date,
+                   check_out: date.check_out_date}
       end
     end
     booked
@@ -55,7 +55,7 @@ class Campground < ApplicationRecord
       lowest = camp.price if camp.price < lowest
       highest = camp.price if camp.price > highest
     end
-    (lowest..highest)
+    [lowest, highest]
   end
 
   private

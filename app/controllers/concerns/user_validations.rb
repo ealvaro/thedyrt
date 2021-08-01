@@ -4,7 +4,7 @@
 module UserValidations
   include ActiveSupport::Concern
 
-  INVALID = 'Missing/Invalid'
+  INVALID = "Missing/Invalid"
   # rubocop:disable Metrics/AbcSize
   def validations
     @errors = []

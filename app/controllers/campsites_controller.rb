@@ -7,7 +7,7 @@ class CampsitesController < ApplicationController
   # GET /campsites
   # GET /campsites.json
   def index
-    @campsites = Campsite.all
+    @campsites = Campsite.all.includes(:booked_dates)
   end
 
   # GET /campsites/1

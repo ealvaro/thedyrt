@@ -3,36 +3,36 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+TOTAL_CAMPGROUNDS = 1000
+CAMPSITES_PER_CAMP = 4
+BOOKED_CAMPSITES_PER_CAMP = 3
+LOWEST_PRICE = 35
+HIGHEST_PRICE = 199
+MAX_DAYS_BOOKED_IN_ADVANCE = 90
 
-# Time slots during the next 14 days
-
-1000.times do
+TOTAL_CAMPGROUNDS.times do
   # Campground name must be unique so we add a random Roman numeral to the name
   name = Faker::Mountain.name
   Campground.create!(
-    name: "#{name} #{rand(1..1000).roman}"
+    name: "#{name} #{rand(1..TOTAL_CAMPGROUNDS).roman}"
   )
 rescue ActiveRecord::RecordInvalid
   next
 end
-
-(Campground.all.count * 4).times do |index|
+# Want X Campsites per Campground as sample data
+(Campground.all.count * CAMPSITES_PER_CAMP).times do |index|
   Campsite.create!(
     name: Faker::Alphanumeric.alphanumeric(number: 10),
-    price: Faker::Number.between(from: 35, to: 199),
-    campground: Campground.find(index / 4 + 1)
+    price: Faker::Number.between(from: LOWEST_PRICE, to: HIGHEST_PRICE),
+    campground: Campground.find(index / CAMPSITES_PER_CAMP + 1)
   )
 end
-
-(Campground.all.count * 4).times do |index|
-  rnd_date = Faker::Date.forward(days: 90)
+# Want Y times the number of Campgrounds with Campsites booked in the future
+(Campground.all.count * BOOKED_CAMPSITES_PER_CAMP).times do |index|
+  rnd_date = Faker::Date.forward(days: MAX_DAYS_BOOKED_IN_ADVANCE)
   BookedDate.create!(
     campsite: Campsite.find(index + 1),
     check_in_date: rnd_date,
-    check_out_date: rnd_date + rand(1..21).days
+    check_out_date: rnd_date + rand(1..MAX_DAYS_BOOKED_IN_ADVANCE / 2).days
   )
 end
