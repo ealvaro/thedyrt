@@ -41,6 +41,7 @@ Campsite
 `jbuilder` for templating
 `dotenv-rails` for env. vars. management
 `rubocop` for sanity and linting
+`shoulda-matchers` for easier Rspec testing
 
 * System generation
 ```shell
@@ -72,7 +73,7 @@ sudo docker-compose run app rake db:load
 * How to run the test suite
 
 ```shell
-sudo docker-compose run app rspec spec/requests/
+sudo docker-compose run app rspec
 ```
 
 * How to test it from a web browser
@@ -138,4 +139,4 @@ curl -i -X POST -H "Content-Type: application/json" -H "Accept: application/json
 ```
 
 * Testing using POSTMAN
-<https://www.getpostman.com/collections/a5e67fb515f13b91baf7>
+<https://www.getpostman.com/collections/099f6c858ffe59f96a9c>
