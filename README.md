@@ -49,31 +49,28 @@ rails g scaffold campground name:string
 rails g scaffold campsite name:string price:integer campground:references
 rails g scaffold booked_date check_in_date:date check_out_date:date campsite:references
 ```
-* Webapp VM creation
-
-```shell
-sudo docker build .
-```
 
 * Webapp & Database VMs composition and start
 ```shell
-sudo docker-compose build
-sudo docker-compose up
+cp .env.docker .env
+docker-compose build
+docker-compose run app rake db:create db:migrate db:seed
+docker-compose up
 ```
 
-* Database initialization (run from a different console)
+* Database initialization (will try to create & load 1,000 Campsites)
 ```shell
-sudo docker-compose run app rake db:create db:migrate db:seed
+docker-compose run app rake db:create db:migrate db:seed
 ```
 or if you want to load a csv file then run the following and make sure you put the file in the /loads folder.
 ```shell
-sudo docker-compose run app rake db:load
+docker-compose run app rake db:load
 ```
 
 * How to run the test suite
 
 ```shell
-sudo docker-compose run app rspec
+docker-compose run app rspec
 ```
 
 * How to test it from a web browser
@@ -84,7 +81,7 @@ sudo docker-compose run app rspec
 * How to stop the webapp and database
 
 ```shell
-sudo docker-compose stop
+docker-compose stop
 ```
 
 ## Assumptions
