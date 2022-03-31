@@ -13,7 +13,7 @@ gem "rails", "~> 5.0.7", ">= 5.0.7.2"
 # Use sqlite3 as the database for Active Record
 gem "pg"
 # Use Puma as the app server
-gem "puma", "~> 4.0"
+gem "puma", "~> 4.3"
 # Bump this gem for security reasons
 gem "nokogiri", "1.11.4"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
