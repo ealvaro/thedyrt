@@ -83,6 +83,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.7.2)
@@ -166,7 +168,7 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.1.0)
     thread_safe (0.3.6)
-    tzinfo (1.2.9)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     unicode-display_width (2.0.0)
     websocket-driver (0.6.5)
@@ -186,6 +188,7 @@ DEPENDENCIES
   nokogiri (= 1.11.4)
   pg
   puma (~> 4.0)
+  rack-cors
   rails (~> 5.0.7, >= 5.0.7.2)
   rspec-rails
   rubocop
