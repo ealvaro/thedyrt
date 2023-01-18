@@ -82,7 +82,9 @@ GEM
     puma (4.3.8)
       nio4r (~> 2.0)
     racc (1.5.2)
-    rack (2.2.3)
+    rack (2.2.6.2)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.7.2)
@@ -186,6 +188,7 @@ DEPENDENCIES
   nokogiri (= 1.11.4)
   pg
   puma (~> 4.0)
+  rack-cors
   rails (~> 5.0.7, >= 5.0.7.2)
   rspec-rails
   rubocop
